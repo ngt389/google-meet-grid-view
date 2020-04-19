@@ -1,5 +1,5 @@
 ;(async function () {
-  if (document.currentScript && document.currentScript.src === 'https://cdn.jsdelivr.net/gh/Fugiman/google-meet-grid-view/extension.min.js') {
+    if (document.currentScript && document.currentScript.src === 'https://cdn.jsdelivr.net/gh/Fugiman/google-meet-grid-view/extension.min.js') {
     // We're running the cached CDN version, load the uncached version (rotates hourly)
     const s = document.createElement('script')
     s.src = 'https://cdn.jsdelivr.net/gh/Fugiman/google-meet-grid-view/extension.js?t=' + Math.floor(new Date() / 3600000)
@@ -27,33 +27,32 @@
     <div id="not-running">${T('notRunning')}</div>
     <div id="no-meeting">${T('noMeeting')}</div>
     <label id="enabled">
-      <input type="checkbox" />
+      <input type="checkbox" class="click"/>
       <span>${T('enabled')}</span>
     </label>
 
-    <div class="spacer"></div>
-
     <label id="show-only-video">
-      <input type="checkbox" />
-      <span>${T('showOnlyVideo')}</span>
+      <input type="checkbox" class="click"/>
+      <span class="line">${T('showOnlyVideo')}</span>
+	  <hr>
     </label>
     <label id="highlight-speaker">
-      <input type="checkbox" />
-      <span>${T('highlightSpeaker')}</span>
+      <input type="checkbox" class="click"/>
+      <span class="line">${T('highlightSpeaker')}</span>
+	  <hr>
     </label>
     <label id="include-own-video">
-      <input type="checkbox" />
-      <span>${T('includeOwnVideo')}</span>
+      <input type="checkbox" class="click"/>
+      <span class="line">${T('includeOwnVideo')}</span>
+	  <hr>
     </label>
     <label id="auto-enable">
-      <input type="checkbox" />
+      <input type="checkbox" class="click"/>
       <span>${T('autoEnable')}</span>
     </label>
 
-    <div class="spacer"></div>
-
     <label id="screen-capture-mode">
-      <input type="checkbox" />
+      <input type="checkbox" class="click"/>
       <span>${T('screenCaptureMode')}</span>
       <small>${T('screenCaptureModeDescription')}</small>
     </label>
@@ -62,7 +61,16 @@
 
     <a id="source-code" href="https://github.com/Fugiman/google-meet-grid-view" target="_blank">
       ${T('sourceCode')}
-    </div>
+    </a>
+	</br>
+	<div id="source-code-logo">
+	<a id="Github" href="https://github.com/Fugiman/google-meet-grid-view" target="_blank">
+    <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="Github logo" height="44"  width="auto">
+    </a>
+	<a id="Google_Meet" href="https://meet.google.com/_meet" target="_blank">
+    <img src="https://seeklogo.com/images/G/google-meet-logo-4A92AA9AFE-seeklogo.com.png" alt="Google Meet logo" height="40"  width="auto">
+    </a>
+	</div>
   `
 
   // Get state
@@ -120,3 +128,16 @@
     }
   })
 })()
+
+  // Disable right button
+  var BM = 2; // button middle
+  var BR = 3; // button right
+
+  function mouseDown(e) 
+  { 
+    try { if (event.button==BM||event.button==BR) {return false;} }  
+    catch (e) { if (e.which == BR) {return false;} } 
+  }
+  document.oncontextmenu = function() { return false; }
+  document.ondragstart   = function() { return false; }
+  document.onmousedown   = mouseDown;
